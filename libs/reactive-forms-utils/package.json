@@ -1,9 +1,10 @@
 {
 	"name": "ngx-reactive-forms-utils",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"peerDependencies": {
 		"@angular/common": "^14.2.0",
-		"@angular/core": "^14.2.0"
+		"@angular/core": "^14.2.0",
+		"@angular/forms": "^14.2.0"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
