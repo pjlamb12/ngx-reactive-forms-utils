@@ -24,7 +24,8 @@
 	"peerDependencies": {
 		"@angular/common": "^14.2.0",
 		"@angular/core": "^14.2.0",
-		"@angular/forms": "^14.2.0"
+		"@angular/forms": "^14.2.0",
+		"@ngneat/until-destroy": "^9.2.2"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
