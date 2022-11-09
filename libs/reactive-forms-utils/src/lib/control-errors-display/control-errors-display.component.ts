@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, HostBinding, Inject, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ErrorMessages, FORM_ERRORS } from '../error-utils';
+import { CustomErrorMessages, FORM_ERRORS } from '../error-utils';
 
 @Component({
 	selector: '[ngxControlErrorsDisplay]',
@@ -23,9 +23,9 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 		return this._text && this.rules.every((rule) => this.control[rule as keyof NgControl]);
 	}
 
-	private _errorMessages: ErrorMessages = this._errors;
+	private _errorMessages: CustomErrorMessages = this._errors;
 
-	constructor(@Inject(FORM_ERRORS) private _errors: ErrorMessages) {}
+	constructor(@Inject(FORM_ERRORS) private _errors: CustomErrorMessages) {}
 
 	ngAfterContentInit() {
 		if (this.control) {

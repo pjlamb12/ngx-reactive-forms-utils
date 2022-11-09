@@ -1,15 +1,15 @@
 import { InjectionToken } from '@angular/core';
 
-export interface ErrorMessages {
+export interface CustomErrorMessages {
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	[key: string]: Function;
 }
 
-export function addCustomError(name: string, fn: Function) {
+export function addCustomErrorMessage(name: string, fn: Function) {
 	defaultErrors[name] = fn;
 }
 
-export const defaultErrors: ErrorMessages = {
+export const defaultErrors: CustomErrorMessages = {
 	required: () => `This field is required`,
 	minlength: ({ requiredLength, actualLength }: { requiredLength: number; actualLength: number }) =>
 		`Expected length of ${requiredLength} but got ${actualLength}`,
