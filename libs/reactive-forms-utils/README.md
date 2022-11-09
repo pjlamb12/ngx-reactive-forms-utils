@@ -41,22 +41,22 @@ The `ngx-control-errors-display` component will show the validation errors for a
 
 ```html
 <form class="mx-auto flex flex-col gap-4 justify-center items-center" [formGroup]="form">
-	<div class="flex gap-2 items-start">
-		<label class="pt-2" for="name">Name: </label>
-		<ngx-control-errors-display errorClasses="error-message">
-			<input type="text" formControlName="name" />
-		</ngx-control-errors-display>
-	</div>
-	<ngx-control-errors-display errorClasses="error-message">
-		<div class="flex gap-2 items-center">
-			<label for="email">Email: </label><input type="text" formControlName="email" />
-		</div>
-	</ngx-control-errors-display>
-	<ngx-control-errors-display errorClasses="error-message">
-		<div class="flex gap-2 items-center">
-			<label for="age">Age: </label><input type="number" formControlName="age" />
-		</div>
-	</ngx-control-errors-display>
+  <div class="flex gap-2 items-start">
+    <label class="pt-2" for="name">Name: </label>
+    <ngx-control-errors-display errorClasses="error-message">
+      <input type="text" formControlName="name" />
+    </ngx-control-errors-display>
+  </div>
+  <ngx-control-errors-display errorClasses="error-message">
+    <div class="flex gap-2 items-center">
+      <label for="email">Email: </label><input type="text" formControlName="email" />
+    </div>
+  </ngx-control-errors-display>
+  <ngx-control-errors-display errorClasses="error-message">
+    <div class="flex gap-2 items-center">
+      <label for="age">Age: </label><input type="number" formControlName="age" />
+    </div>
+  </ngx-control-errors-display>
 </form>
 ```
 
