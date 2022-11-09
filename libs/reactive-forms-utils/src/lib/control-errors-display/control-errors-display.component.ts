@@ -8,7 +8,7 @@ import { CustomErrorMessages, FORM_ERRORS } from '../error-utils';
 	styleUrls: ['./control-errors-display.component.scss'],
 })
 export class ControlErrorsDisplayComponent implements AfterContentInit {
-	@Input() cssClass = '';
+	@Input() cssClasses = '';
 	rules = ['touched'];
 
 	@ContentChild(NgControl, { static: true }) control!: NgControl;
@@ -30,28 +30,27 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 	ngAfterContentInit() {
 		if (this.control) {
 			// Set error here in case form is initialized with invalid data
-			this.setError();
+			this._text = this.setError();
 			this.control.statusChanges?.pipe().subscribe(() => {
-				this.setError();
+				this._text = this.setError();
 			});
 		}
 	}
 
 	private setError() {
 		const errors = this.control.errors;
-		this._text = '';
-		let innerHtml = '';
+		let text = '';
 
 		if (errors) {
-			this._text = Object.keys(errors).reduce((html, errorKey) => {
+			text = Object.keys(errors).reduce((html, errorKey) => {
 				const getError = this._errorMessages[errorKey];
 				const nextErrorText = getError ? getError(errors[errorKey]) : 'Unknown Error';
 
 				const newParagraph = `<p>${nextErrorText}</p>`;
 				return (html += newParagraph);
 			}, '');
-		} else {
-			this._text = '';
 		}
+
+		return text;
 	}
 }
