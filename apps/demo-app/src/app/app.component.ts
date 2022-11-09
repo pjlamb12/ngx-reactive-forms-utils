@@ -10,7 +10,7 @@ import { addCustomErrorMessage, CustomValidators } from 'ngx-reactive-forms-util
 export class AppComponent implements OnInit {
 	title = 'demo-app';
 	form = this._fb.group({
-		name: ['', [Validators.required]],
+		name: ['', [Validators.required, Validators.minLength(9)]],
 		email: ['', [Validators.required, Validators.email]],
 		age: [null, [Validators.min(5), CustomValidators.number]],
 	});

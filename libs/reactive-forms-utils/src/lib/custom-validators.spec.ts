@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { CustomValidators } from './custom-validators';
 
 describe('CustomValidators', () => {

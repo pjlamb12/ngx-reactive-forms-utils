@@ -1,8 +1,9 @@
 import { AfterContentInit, Component, ContentChild, HostBinding, Inject, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { CustomErrorMessages, FORM_ERRORS } from '../error-utils';
+import { CustomErrorMessages, FORM_ERRORS } from '../custom-error-message-utils';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: '[ngxControlErrorsDisplay]',
 	templateUrl: './control-errors-display.component.html',
 	styleUrls: ['./control-errors-display.component.scss'],

@@ -1,15 +1,18 @@
 import { InjectionToken } from '@angular/core';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type CustomErrorMesageFunction = (...args: any[]) => string;
+
 export interface CustomErrorMessages {
 	// eslint-disable-next-line @typescript-eslint/ban-types
-	[key: string]: Function;
+	[key: string]: CustomErrorMesageFunction;
 }
 
-export function addCustomErrorMessage(name: string, fn: Function) {
-	defaultErrors[name] = fn;
+export function addCustomErrorMessage(name: string, fn: CustomErrorMesageFunction) {
+	defaultCustomErrorMessages[name] = fn;
 }
 
-export const defaultErrors: CustomErrorMessages = {
+export const defaultCustomErrorMessages: CustomErrorMessages = {
 	required: () => `This field is required`,
 	minlength: ({ requiredLength, actualLength }: { requiredLength: number; actualLength: number }) =>
 		`Expected length of ${requiredLength} but got ${actualLength}`,
@@ -24,5 +27,5 @@ export const defaultErrors: CustomErrorMessages = {
 
 export const FORM_ERRORS = new InjectionToken('FORM_ERRORS', {
 	providedIn: 'root',
-	factory: () => defaultErrors,
+	factory: () => defaultCustomErrorMessages,
 });
