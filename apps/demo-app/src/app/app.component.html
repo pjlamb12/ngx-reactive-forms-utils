@@ -1,17 +1,18 @@
 <form class="mx-auto flex flex-col gap-4 justify-center items-center" [formGroup]="form">
-	<div ngxControlErrorsDisplay cssClasses="error-message">
-		<div class="flex gap-2 items-center">
-			<label for="name">Name: </label><input type="text" formControlName="name" />
-		</div>
+	<div class="flex gap-2 items-start">
+		<label class="pt-2" for="name">Name: </label>
+		<ngx-control-errors-display errorClasses="error-message">
+			<input type="text" formControlName="name" />
+		</ngx-control-errors-display>
 	</div>
-	<div ngxControlErrorsDisplay cssClasses="error-message">
+	<ngx-control-errors-display errorClasses="error-message">
 		<div class="flex gap-2 items-center">
 			<label for="email">Email: </label><input type="text" formControlName="email" />
 		</div>
-	</div>
-	<div ngxControlErrorsDisplay cssClasses="error-message">
+	</ngx-control-errors-display>
+	<ngx-control-errors-display errorClasses="error-message">
 		<div class="flex gap-2 items-center">
 			<label for="age">Age: </label><input type="number" formControlName="age" />
 		</div>
-	</div>
+	</ngx-control-errors-display>
 </form>

@@ -3,14 +3,14 @@ import { NgControl } from '@angular/forms';
 import { CustomErrorMessages, FORM_ERRORS } from '../custom-error-message-utils';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: '[ngxControlErrorsDisplay]',
+	selector: 'ngx-control-errors-display',
 	templateUrl: './control-errors-display.component.html',
 	styleUrls: ['./control-errors-display.component.scss'],
 })
 export class ControlErrorsDisplayComponent implements AfterContentInit {
-	@Input() cssClasses = '';
-	rules = ['touched'];
+	@Input() containerClasses = '';
+	@Input() errorClasses = '';
+	@Input() rules = ['touched'];
 
 	@ContentChild(NgControl, { static: true }) control!: NgControl;
 
