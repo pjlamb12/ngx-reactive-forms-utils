@@ -1,6 +1,26 @@
 {
 	"name": "ngx-reactive-forms-utils",
 	"version": "1.0.0",
+	"author": {
+		"email": "preston.j.lamb@gmail.com",
+		"name": "Preston Lamb",
+		"url": "http://www.prestonlamb.com"
+	},
+	"homepage": "https://github.com/pjlamb12/ngx-reactive-forms-utils",
+	"maintainers": [
+		"Preston Lamb"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pjlamb12/ngx-reactive-forms-utils"
+	},
+	"license": "MIT",
+	"keywords": [
+		"angular",
+		"reactive forms",
+		"forms",
+		"reactive"
+	],
 	"peerDependencies": {
 		"@angular/common": "^14.2.0",
 		"@angular/core": "^14.2.0",
