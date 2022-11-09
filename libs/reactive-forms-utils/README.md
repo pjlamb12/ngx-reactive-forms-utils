@@ -1,7 +1,8 @@
-# reactive-forms-utils
+# ngx-reactive-forms-utils
 
-This library was generated with [Nx](https://nx.dev).
+Reactive forms in Angular are a great way to manage forms. This library provides utilities that make it easier to work with reactive forms.
 
-## Running unit tests
+Utilities that are provided include:
 
-Run `nx test reactive-forms-utils` to execute the unit tests.
+-   Easy validation error display
+-   Some common custom validators
