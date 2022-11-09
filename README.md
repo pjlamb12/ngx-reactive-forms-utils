@@ -39,6 +39,27 @@ The `ngx-control-errors-display` component will show the validation errors for a
 -   `errorClasses`: a string of css classes to apply to the error message elements
 -   `rules`: a list of rules for when to check for errors on the form control. it defaults to `['touched']`
 
+```html
+<form class="mx-auto flex flex-col gap-4 justify-center items-center" [formGroup]="form">
+	<div class="flex gap-2 items-start">
+		<label class="pt-2" for="name">Name: </label>
+		<ngx-control-errors-display errorClasses="error-message">
+			<input type="text" formControlName="name" />
+		</ngx-control-errors-display>
+	</div>
+	<ngx-control-errors-display errorClasses="error-message">
+		<div class="flex gap-2 items-center">
+			<label for="email">Email: </label><input type="text" formControlName="email" />
+		</div>
+	</ngx-control-errors-display>
+	<ngx-control-errors-display errorClasses="error-message">
+		<div class="flex gap-2 items-center">
+			<label for="age">Age: </label><input type="number" formControlName="age" />
+		</div>
+	</ngx-control-errors-display>
+</form>
+```
+
 ## Custom Validators
 
 The Angular reactive forms module provides a good list of default Validators for form controls, but there are some that would be convenient that are not present. This library adds those validators:
