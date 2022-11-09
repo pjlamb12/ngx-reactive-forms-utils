@@ -1,1 +1,12 @@
-<ngx-reactive-form-utils-nx-welcome></ngx-reactive-form-utils-nx-welcome>
+<form class="mx-auto flex flex-col gap-4 justify-center items-center" [formGroup]="form">
+	<div ngxControlErrorsDisplay cssClass="error-message">
+		<div class="flex gap-2 items-center">
+			<label for="name">Name: </label><input type="text" formControlName="name" />
+		</div>
+	</div>
+	<div ngxControlErrorsDisplay cssClass="error-message">
+		<div class="flex gap-2 items-center">
+			<label for="age">Age: </label><input type="number" formControlName="age" />
+		</div>
+	</div>
+</form>

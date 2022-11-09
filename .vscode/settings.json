@@ -1,3 +1,4 @@
 {
-  "editor.tabCompletion": "on"
+"editor.tabCompletion": "on",
+"diffEditor.codeLens": true
 }
