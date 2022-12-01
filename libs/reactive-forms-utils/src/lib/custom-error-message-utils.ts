@@ -23,6 +23,11 @@ export const defaultCustomErrorMessages: CustomErrorMessages = {
 		`You entered a value of ${actual}, but the max you can enter is ${max}.`,
 	email: () => `Your email address is not valid.`,
 	number: () => `This field can only contain numbers.`,
+	confirmStringMatch: ({ field1, field2 }) => {
+		const formattedField1: string = field1.replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ').toLowerCase();
+		const formattedField2: string = field2.replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ').toLowerCase();
+		return `The values of ${formattedField1} and ${formattedField2} don't match.`;
+	},
 };
 
 export const FORM_ERRORS = new InjectionToken('FORM_ERRORS', {

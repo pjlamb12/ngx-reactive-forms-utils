@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CustomValidators } from './custom-validators';
 
 describe('CustomValidators', () => {
@@ -148,6 +148,22 @@ describe('CustomValidators', () => {
 			const test1 = CustomValidators.validZipCode(control1);
 
 			expect(test1).toBeNull();
+		});
+	});
+
+	describe('confirmStringsMatch', () => {
+		describe('Confirm String Match', () => {
+			it("should set the error on the confirmation field if the values don't match ", () => {
+				const group = new FormGroup({ name: new FormControl('test'), confirmName: new FormControl('this') });
+				const functionCall = CustomValidators.confirmStringMatch('name', 'confirmName');
+				functionCall(group);
+
+				const confirmationFieldErrors = group.get('confirmName')?.errors;
+
+				expect(confirmationFieldErrors).toStrictEqual({
+					confirmStringMatch: { field1: 'name', field2: 'confirmName' },
+				});
+			});
 		});
 	});
 });
