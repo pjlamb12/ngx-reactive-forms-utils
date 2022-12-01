@@ -1,19 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder } from '@angular/forms';
 import { DemoFormComponent } from './demo-form.component';
 
 describe('DemoFormComponent', () => {
 	let component: DemoFormComponent;
-	let fixture: ComponentFixture<DemoFormComponent>;
+	let mockFormBuilder = new FormBuilder();
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [DemoFormComponent],
-		}).compileComponents();
-
-		fixture = TestBed.createComponent(DemoFormComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
+		component = new DemoFormComponent(mockFormBuilder);
 	});
 
 	it('should create', () => {
