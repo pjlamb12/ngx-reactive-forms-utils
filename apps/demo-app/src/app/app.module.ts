@@ -5,9 +5,10 @@ import { ReactiveFormsUtilsModule } from 'ngx-reactive-forms-utils';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
+import { DemoFormComponent } from './demo-form/demo-form.component';
 
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent],
+	declarations: [AppComponent, NxWelcomeComponent, DemoFormComponent],
 	imports: [BrowserModule, ReactiveFormsModule, ReactiveFormsUtilsModule],
 	providers: [],
 	bootstrap: [AppComponent],
