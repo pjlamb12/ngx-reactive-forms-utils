@@ -1,0 +1,110 @@
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<form [formGroup]="form" class="space-y-8 divide-y divide-gray-200">
+	<div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+		<div class="space-y-6 sm:space-y-5">
+			<div>
+				<h3 class="text-lg font-medium leading-6 text-gray-900">Demo Form</h3>
+				<p class="mt-1 max-w-2xl text-sm text-gray-500">
+					This form will demonstrate the use of the form validation and the display of errors when the
+					validation is not met.
+				</p>
+			</div>
+
+			<div class="space-y-6 sm:space-y-5">
+				<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+						>Number</label
+					>
+					<div class="mt-1 sm:col-span-2 sm:mt-0">
+						<ngx-control-errors-display errorClasses="error-message mt-2">
+							<div class="rounded-md shadow-sm">
+								<input
+									type="text"
+									formControlName="numberOnly"
+									class="block w-full border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+								/>
+							</div>
+						</ngx-control-errors-display>
+					</div>
+				</div>
+				<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+						>Phone Number</label
+					>
+					<div class="mt-1 sm:col-span-2 sm:mt-0">
+						<ngx-control-errors-display errorClasses="error-message mt-2">
+							<div class="rounded-md shadow-sm">
+								<input
+									type="text"
+									formControlName="phone"
+									class="block w-full border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+								/>
+							</div>
+						</ngx-control-errors-display>
+					</div>
+				</div>
+				<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+						>Zip Code</label
+					>
+					<div class="mt-1 sm:col-span-2 sm:mt-0">
+						<ngx-control-errors-display errorClasses="error-message mt-2">
+							<div class="rounded-md shadow-sm">
+								<input
+									type="text"
+									formControlName="zipCode"
+									class="block w-full border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+								/>
+							</div>
+						</ngx-control-errors-display>
+					</div>
+				</div>
+				<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+						>Password</label
+					>
+					<div class="mt-1 sm:col-span-2 sm:mt-0">
+						<ngx-control-errors-display errorClasses="error-message mt-2">
+							<div class="rounded-md shadow-sm">
+								<input
+									type="text"
+									formControlName="password"
+									class="block w-full border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+								/>
+							</div>
+						</ngx-control-errors-display>
+					</div>
+				</div>
+				<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+					<label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+						>Confirm Password</label
+					>
+					<div class="mt-1 sm:col-span-2 sm:mt-0">
+						<ngx-control-errors-display errorClasses="error-message mt-2">
+							<div class="rounded-md shadow-sm">
+								<input
+									type="text"
+									formControlName="confirmPassword"
+									class="block w-full border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+								/>
+							</div>
+						</ngx-control-errors-display>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
