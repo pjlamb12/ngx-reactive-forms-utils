@@ -8,6 +8,7 @@
 		"start": "nx serve",
 		"test": "nx test",
 		"build": "nx build",
+		"build:app": "nx build demo-app",
 		"build:lib": "npm run build reactive-forms-utils -- --configuration production"
 	},
 	"private": true,
