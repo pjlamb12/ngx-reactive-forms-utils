@@ -67,3 +67,4 @@ The Angular reactive forms module provides a good list of default Validators for
 -   `phoneNumber`: validates a phone number
 -   `number`: validates that the value is a number
 -   `validZipCode`: validates a US zip code
+-   `confirmStringMatch`: validates that field 1 and field 2 have the same value
