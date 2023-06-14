@@ -1,5 +1,9 @@
 <div [ngClass]="containerClasses">
 	<ng-content></ng-content>
 
-	<div *ngIf="_hasError" [ngClass]="errorClasses" [innerHtml]="_text"></div>
+	<ng-container *ngIf="rulesBroken">
+		<ng-container *ngIf="errorsList$">
+			<p [ngClass]="errorClasses" *ngFor="let error of errorsList$ | async">{{ error }}</p>
+		</ng-container>
+	</ng-container>
 </div>
