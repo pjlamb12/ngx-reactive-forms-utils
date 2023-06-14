@@ -1,9 +1,8 @@
-import { AfterContentInit, Component, ContentChild, HostBinding, Inject, Input } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, Inject, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, map, startWith } from 'rxjs';
 import { CustomErrorMessages, FORM_ERRORS } from '../custom-error-message-utils';
 
-@UntilDestroy()
 @Component({
 	selector: 'ngx-control-errors-display',
 	templateUrl: './control-errors-display.component.html',
@@ -16,14 +15,10 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 
 	@ContentChild(NgControl, { static: true }) control!: NgControl;
 
-	@HostBinding('class.hasError') get setErrorClass() {
-		return this._hasError;
-	}
+	errorsList$: Observable<string[]> | undefined;
 
-	_text = '';
-
-	get _hasError() {
-		return this._text && this.rules.every((rule) => this.control[rule as keyof NgControl]);
+	get rulesBroken() {
+		return this.rules.every((rule) => this.control[rule as keyof NgControl]);
 	}
 
 	private _errorMessages: CustomErrorMessages = this._errors;
@@ -32,28 +27,20 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 
 	ngAfterContentInit() {
 		if (this.control) {
-			// Set error here in case form is initialized with invalid data
-			this._text = this.setError();
-			this.control.statusChanges?.pipe(untilDestroyed(this)).subscribe(() => {
-				this._text = this.setError();
-			});
+			this.errorsList$ = this.control.statusChanges?.pipe(
+				startWith(this.control.status),
+				map(() => {
+					const errors = this.control.errors;
+
+					if (errors) {
+						return Object.keys(errors).map((errorKey) => {
+							const getError = this._errorMessages[errorKey];
+							return getError ? getError(errors[errorKey]) : 'Unknown Error';
+						});
+					}
+					return [];
+				}),
+			);
 		}
-	}
-
-	private setError() {
-		const errors = this.control.errors;
-		let text = '';
-
-		if (errors) {
-			text = Object.keys(errors).reduce((html, errorKey) => {
-				const getError = this._errorMessages[errorKey];
-				const nextErrorText = getError ? getError(errors[errorKey]) : 'Unknown Error';
-
-				const newParagraph = `<p>${nextErrorText}</p>`;
-				return (html += newParagraph);
-			}, '');
-		}
-
-		return text;
 	}
 }
