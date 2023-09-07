@@ -2,8 +2,10 @@
 	<ng-content></ng-content>
 
 	<ng-container *ngIf="rulesBroken">
-		<ng-container *ngIf="errorsList$">
-			<p [ngClass]="errorClasses" *ngFor="let error of errorsList$ | async">{{ error }}</p>
+		<ng-container *ngIf="errorsList$ | async as errorsList">
+			<ng-container *ngIf="errorsList && errorsList.length">
+				<p [ngClass]="errorClasses" *ngFor="let error of errorsList">{{ error }}</p>
+			</ng-container>
 		</ng-container>
 	</ng-container>
 </div>

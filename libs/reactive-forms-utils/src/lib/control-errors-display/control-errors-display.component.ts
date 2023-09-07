@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, ContentChild, Inject, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
-import { CustomErrorMessages, FORM_ERRORS } from '../custom-error-message-utils';
+import { Observable, debounceTime, map, startWith } from 'rxjs';
+import { CustomErrorMessages, FORM_ERRORS, FORM_ERRORS_DEBOUNCE_TIME } from '../custom-error-message-utils';
 
 @Component({
 	selector: 'ngx-control-errors-display',
@@ -23,12 +23,16 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 
 	private _errorMessages: CustomErrorMessages = this._errors;
 
-	constructor(@Inject(FORM_ERRORS) private _errors: CustomErrorMessages) {}
+	constructor(
+		@Inject(FORM_ERRORS) private _errors: CustomErrorMessages,
+		@Inject(FORM_ERRORS_DEBOUNCE_TIME) private debounceTime: number,
+	) {}
 
 	ngAfterContentInit() {
 		if (this.control) {
 			this.errorsList$ = this.control.statusChanges?.pipe(
 				startWith(this.control.status),
+				debounceTime(this.debounceTime),
 				map(() => {
 					const errors = this.control.errors;
 

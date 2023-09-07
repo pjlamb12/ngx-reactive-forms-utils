@@ -3,9 +3,10 @@ import { ControlErrorsDisplayComponent } from './control-errors-display.componen
 describe('ControlErrorsDisplayComponent', () => {
 	let component: ControlErrorsDisplayComponent;
 	const mockErrorMessages = {};
+	const mockDebounceTime = 0;
 
 	beforeEach(() => {
-		component = new ControlErrorsDisplayComponent(mockErrorMessages);
+		component = new ControlErrorsDisplayComponent(mockErrorMessages, mockDebounceTime);
 	});
 
 	it('should create', () => {
