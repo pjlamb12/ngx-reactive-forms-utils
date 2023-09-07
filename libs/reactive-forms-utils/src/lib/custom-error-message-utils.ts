@@ -34,3 +34,8 @@ export const FORM_ERRORS = new InjectionToken('FORM_ERRORS', {
 	providedIn: 'root',
 	factory: () => defaultCustomErrorMessages,
 });
+
+export const FORM_ERRORS_DEBOUNCE_TIME = new InjectionToken('FORM_ERRORS_DEBOUNCE_TIME', {
+	providedIn: 'root',
+	factory: () => 0,
+});
