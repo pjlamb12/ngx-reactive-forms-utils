@@ -12,8 +12,16 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 	@Input() containerClasses = '';
 	@Input() errorClasses = '';
 	@Input() rules = ['touched'];
+	private _control!: NgControl;
 
-	@ContentChild(NgControl, { static: true }) control!: NgControl;
+	@ContentChild(NgControl, { static: false }) set control(ctrl: NgControl) {
+		console.log({ ctrl });
+		this._control = ctrl;
+		this.initObservable();
+	}
+	get control() {
+		return this._control;
+	}
 
 	errorsList$: Observable<string[]> | undefined;
 
@@ -29,6 +37,27 @@ export class ControlErrorsDisplayComponent implements AfterContentInit {
 	) {}
 
 	ngAfterContentInit() {
+		if (this.control) {
+			this.errorsList$ = this.control.statusChanges?.pipe(
+				startWith(this.control.status),
+				debounceTime(this.debounceTime),
+				map(() => {
+					const errors = this.control.errors;
+
+					if (errors) {
+						return Object.keys(errors).map((errorKey) => {
+							const getError = this._errorMessages[errorKey];
+							return getError ? getError(errors[errorKey]) : 'Unknown Error';
+						});
+					}
+					return [];
+				}),
+			);
+		}
+	}
+
+	initObservable() {
+		console.log('init observable called');
 		if (this.control) {
 			this.errorsList$ = this.control.statusChanges?.pipe(
 				startWith(this.control.status),
