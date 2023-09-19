@@ -18,6 +18,8 @@ export class DemoFormComponent implements OnInit {
 			zipCode: ['', [Validators.required, CustomValidators.validZipCode]],
 			password: ['', [Validators.required]],
 			confirmPassword: ['', [Validators.required]],
+			minAge: [null, [Validators.required, CustomValidators.minAge(18)]],
+			maxAge: [null, [Validators.required, CustomValidators.maxAge(10)]],
 		},
 		this.options,
 	);

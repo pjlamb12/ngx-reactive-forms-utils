@@ -20,6 +20,8 @@ Error messages are provided for the following common errors out of the box:
 -   max
 -   email
 -   number
+-   minAge
+-   maxAge
 
 These error messages can be overwritten with the `addCustomErrorMessage` function:
 
@@ -68,3 +70,5 @@ The Angular reactive forms module provides a good list of default Validators for
 -   `number`: validates that the value is a number
 -   `validZipCode`: validates a US zip code
 -   `confirmStringMatch`: validates that field 1 and field 2 have the same value
+-   `minAge`: validates that the age passed in to the control is at least the provided age
+-   `maxAge`: validates that the age passed in to the control is no greater than the provided age
