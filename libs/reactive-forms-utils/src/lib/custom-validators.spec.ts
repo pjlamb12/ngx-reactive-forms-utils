@@ -166,4 +166,56 @@ describe('CustomValidators', () => {
 			});
 		});
 	});
+
+	describe('minAge', () => {
+		beforeEach(() => {
+			jest.useFakeTimers({
+				now: new Date('2023-09-18'),
+			});
+		});
+
+		it('should set error if the age is over the minimum age', () => {
+			const control1 = new FormControl();
+			control1.setValue(new Date('01/01/2023'));
+			const test1 = CustomValidators.minAge(control1, 25);
+
+			expect(test1).toStrictEqual({ minAge: { minAge: 25, actual: 0 } });
+		});
+
+		it('should not set error if minimum age is met', () => {
+			const control1 = new FormControl();
+			control1.setValue(new Date('01/01/1996'));
+			const test1 = CustomValidators.minAge(control1, 5);
+
+			expect(test1).toBeNull();
+		});
+
+		afterEach(() => {
+			jest.useRealTimers();
+		});
+	});
+
+	describe('maxAge', () => {
+		beforeEach(() => {
+			jest.useFakeTimers({
+				now: new Date('2023-09-18'),
+			});
+		});
+
+		it('should set error if the age is under the maximum age', () => {
+			const control1 = new FormControl();
+			control1.setValue(new Date('01/01/1996'));
+			const test1 = CustomValidators.maxAge(control1, 25);
+
+			expect(test1).toStrictEqual({ maxAge: { maxAge: 25, actual: 27 } });
+		});
+
+		it('should not set error if age is less than maximum age', () => {
+			const control1 = new FormControl();
+			control1.setValue(new Date('01/01/1996'));
+			const test1 = CustomValidators.maxAge(control1, 29);
+
+			expect(test1).toBeNull();
+		});
+	});
 });
