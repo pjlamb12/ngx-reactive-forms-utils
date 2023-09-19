@@ -50,33 +50,37 @@ export abstract class CustomValidators {
 		};
 	}
 
-	static minAge(control: AbstractControl, minAge: number): ValidationErrors | null {
-		if (!control.value) {
+	static minAge(minAge: number): ValidatorFn {
+		return (control: AbstractControl) => {
+			if (!control.value) {
+				return null;
+			}
+
+			const birthDate = new Date(control.value);
+			const age = calculateAge(birthDate);
+
+			if (age < minAge) {
+				return { minAge: { minAge, actual: age } };
+			}
+
 			return null;
-		}
-
-		const birthDate = new Date(control.value);
-		const age = calculateAge(birthDate);
-
-		if (age < minAge) {
-			return { minAge: { minAge, actual: age } };
-		}
-
-		return null;
+		};
 	}
 
-	static maxAge(control: AbstractControl, maxAge: number): ValidationErrors | null {
-		if (!control.value) {
+	static maxAge(maxAge: number): ValidatorFn {
+		return (control: AbstractControl) => {
+			if (!control.value) {
+				return null;
+			}
+
+			const birthDate = new Date(control.value);
+			const age = calculateAge(birthDate);
+
+			if (age > maxAge) {
+				return { maxAge: { maxAge, actual: age } };
+			}
+
 			return null;
-		}
-
-		const birthDate = new Date(control.value);
-		const age = calculateAge(birthDate);
-
-		if (age > maxAge) {
-			return { maxAge: { maxAge, actual: age } };
-		}
-
-		return null;
+		};
 	}
 }

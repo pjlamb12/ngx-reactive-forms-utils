@@ -28,6 +28,9 @@ export const defaultCustomErrorMessages: CustomErrorMessages = {
 		const formattedField2: string = field2.replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ').toLowerCase();
 		return `The values of ${formattedField1} and ${formattedField2} don't match.`;
 	},
+	minAge: ({ minAge, actual }) => `You must be at least ${minAge} years old. You are currently ${actual} years old.`,
+	maxAge: ({ maxAge, actual }) =>
+		`You must be no more than ${maxAge} years old. You are currently ${actual} years old.`,
 };
 
 export const FORM_ERRORS = new InjectionToken('FORM_ERRORS', {
