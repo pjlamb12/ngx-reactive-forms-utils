@@ -1,28 +1,31 @@
 {
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
-	"npmScope": "ngx-reactive-form-utils",
-	"tasksRunnerOptions": {
-		"default": {
-			"runner": "nx-cloud",
-			"options": {
-				"cacheableOperations": ["build", "lint", "test", "e2e"],
-				"accessToken": "YWNhNjk5ZmQtYTkzYS00MjlhLTlmYTEtZTA1MWVkZTRlZTYwfHJlYWQtd3JpdGU="
-			}
-		}
-	},
 	"targetDefaults": {
 		"build": {
 			"dependsOn": ["^build"],
-			"inputs": ["production", "^production"]
-		},
-		"test": {
-			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+			"inputs": ["production", "^production"],
+			"cache": true
 		},
 		"e2e": {
-			"inputs": ["default", "^production"]
+			"inputs": ["default", "^production"],
+			"cache": true
 		},
 		"lint": {
-			"inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+			"inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+			"cache": true
+		},
+		"@nx/jest:jest": {
+			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+			"cache": true,
+			"options": {
+				"passWithNoTests": true
+			},
+			"configurations": {
+				"ci": {
+					"ci": true,
+					"codeCoverage": true
+				}
+			}
 		}
 	},
 	"namedInputs": {
@@ -32,7 +35,8 @@
 			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
 			"!{projectRoot}/tsconfig.spec.json",
 			"!{projectRoot}/jest.config.[jt]s",
-			"!{projectRoot}/.eslintrc.json"
+			"!{projectRoot}/.eslintrc.json",
+			"!{projectRoot}/src/test-setup.[jt]s"
 		],
 		"sharedGlobals": []
 	},
@@ -54,5 +58,6 @@
 			"style": "scss"
 		}
 	},
-	"defaultProject": "demo-app"
+	"defaultProject": "demo-app",
+	"nxCloudAccessToken": "YWNhNjk5ZmQtYTkzYS00MjlhLTlmYTEtZTA1MWVkZTRlZTYwfHJlYWQtd3JpdGU="
 }
