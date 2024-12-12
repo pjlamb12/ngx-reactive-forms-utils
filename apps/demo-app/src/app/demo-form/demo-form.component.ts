@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { addCustomErrorMessage, CustomValidators } from 'ngx-reactive-forms-utils';
+import { addCustomErrorMessage, CustomValidators, debugForm } from 'ngx-reactive-forms-utils';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'ngx-reactive-form-utils-demo-form',
@@ -23,6 +24,8 @@ export class DemoFormComponent implements OnInit {
 		},
 		this.options,
 	);
+
+	public debugValues$ = debugForm(this.form);
 
 	constructor(private _fb: FormBuilder) {}
 
