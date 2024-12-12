@@ -2,11 +2,14 @@ import { AfterContentInit, Component, ContentChild, Inject, Input } from '@angul
 import { NgControl } from '@angular/forms';
 import { Observable, debounceTime, map, startWith } from 'rxjs';
 import { CustomErrorMessages, FORM_ERRORS, FORM_ERRORS_DEBOUNCE_TIME } from '../custom-error-message-utils';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
 	selector: 'ngx-control-errors-display',
 	templateUrl: './control-errors-display.component.html',
 	styleUrls: ['./control-errors-display.component.scss'],
+	standalone: true,
+	imports: [AsyncPipe],
 })
 export class ControlErrorsDisplayComponent implements AfterContentInit {
 	@Input() containerClasses = '';

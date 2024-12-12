@@ -1,11 +1,13 @@
-<div [ngClass]="containerClasses">
+<div class="{{ containerClasses }}">
 	<ng-content></ng-content>
 
-	<ng-container *ngIf="rulesBroken">
-		<ng-container *ngIf="errorsList$ | async as errorsList">
-			<ng-container *ngIf="errorsList && errorsList.length">
-				<p [ngClass]="errorClasses" *ngFor="let error of errorsList">{{ error }}</p>
-			</ng-container>
-		</ng-container>
-	</ng-container>
+	@if (rulesBroken) {
+		@if (errorsList$ | async; as errorsList) {
+			@if (errorsList && errorsList.length) {
+				@for (error of errorsList; track error) {
+					<p class="{{ errorClasses }}">{{ error }}</p>
+				}
+			}
+		}
+	}
 </div>
