@@ -3,9 +3,10 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { addCustomErrorMessage, CustomValidators } from 'ngx-reactive-forms-utils';
 
 @Component({
-	selector: 'ngx-reactive-form-utils-demo-form',
-	templateUrl: './demo-form.component.html',
-	styleUrls: ['./demo-form.component.scss'],
+    selector: 'ngx-reactive-form-utils-demo-form',
+    templateUrl: './demo-form.component.html',
+    styleUrls: ['./demo-form.component.scss'],
+    standalone: false
 })
 export class DemoFormComponent implements OnInit {
 	private options: AbstractControlOptions = {

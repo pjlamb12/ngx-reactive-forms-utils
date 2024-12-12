@@ -3,8 +3,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 /* eslint-disable */
 
 @Component({
-	selector: 'ngx-reactive-form-utils-nx-welcome',
-	template: `
+    selector: 'ngx-reactive-form-utils-nx-welcome',
+    template: `
 		<!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      This is a starter component and can be deleted.
@@ -796,8 +796,9 @@ nx affected:e2e</pre>
 			</div>
 		</div>
 	`,
-	styles: [],
-	encapsulation: ViewEncapsulation.None,
+    styles: [],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NxWelcomeComponent implements OnInit {
 	constructor() {}
