@@ -6,8 +6,10 @@ Utilities that are provided include:
 
 -   Easy validation error display
 -   Some common custom validators
+-   A function that returns an observable with some debug information for your form
+-   A component that displays the debug information on the screen
 
-To get started, import the `NgxReactiveFormsUtilsModule` in your app's `AppModule`.
+Import the standalone component `ControlErrorsDisplayComponent` in the component or module needed to get started.
 
 ## Validation Error Display
 
@@ -72,3 +74,19 @@ The Angular reactive forms module provides a good list of default Validators for
 -   `confirmStringMatch`: validates that field 1 and field 2 have the same value
 -   `minAge`: validates that the age passed in to the control is at least the provided age
 -   `maxAge`: validates that the age passed in to the control is no greater than the provided age
+
+## Debugging Forms
+
+On more complex forms, it's often difficult to know what the current state of the form is. You can output the information you want with the `valueChanges` observable, but you have to initialize that observable or debugging information on your own each time. This library now provides a couple ways to help you with this.
+
+First is a method, `debugForm`, which returns an observable. The returned value is an object with different form debug information available. Import the method, and assign the return valud of that function to an observable. Then you can use it as needed, such as subscribing to it in the TypeScript file and logging the data to the console. 
+
+Second is a second component that displays the form debug information on the screen for you. Import the standalone component `FormDebugDisplayComponent` and use it in your component template:
+
+```html
+<ngx-form-debug-display [form]="form"></ngx-form-debug-display>
+```
+
+You only need to pass in the form to the debug display component and it handles the rest.
+
+Third is the ability to determine which debug fields are returned or displayed. There is an type, `FormDebugField`, with several available fields that can be displayed. By default, all are displayed, but you can change that by providing an array of the desired fields to either the function or the component. 
