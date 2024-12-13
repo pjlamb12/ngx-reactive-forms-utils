@@ -17,10 +17,14 @@ export type FormDebugField =
 	| FormDebugFieldEnum.Valid
 	| FormDebugFieldEnum.Invalid;
 
+export interface ControlErrorStatusDisplay {
+	errors: ValidationErrors | null;
+	status: FormControlStatus;
+}
 export interface FormDebugValue {
 	value?: Record<string, any>;
 	formErrors?: ValidationErrors | null;
-	controlErrors?: Record<string, ValidationErrors | null>;
+	controlErrors?: Record<string, ControlErrorStatusDisplay>;
 	status?: FormControlStatus;
 	valid?: boolean;
 	invalid?: boolean;
@@ -55,12 +59,19 @@ export function debugForm(
 
 			if (debugFields.includes(FormDebugFieldEnum.ControlErrors)) {
 				const controlErrors = Object.keys(form.controls).reduce(
-					(acc, controlName) => ({
-						...acc,
-						[controlName]: form.get(controlName)?.errors,
-					}),
-					{},
+					(acc, controlName) => {
+						const control = form.get(controlName);
+						return {
+							...acc,
+							[controlName]: {
+								errors: control?.errors,
+								status: control?.status,
+							},
+						} as Record<string, ControlErrorStatusDisplay>;
+					},
+					{} as Record<string, ControlErrorStatusDisplay>,
 				);
+
 				returnObject.controlErrors = controlErrors;
 			}
 
