@@ -1,6 +1,6 @@
 {
 	"name": "ngx-reactive-forms-utils",
-	"version": "3.2.0",
+	"version": "4.0.0",
 	"author": {
 		"email": "preston.j.lamb@gmail.com",
 		"name": "Preston Lamb",
@@ -22,9 +22,9 @@
 		"reactive"
 	],
 	"peerDependencies": {
-		"@angular/common": ">=15.0.4",
-		"@angular/core": ">=15.0.4",
-		"@angular/forms": ">=15.0.4"
+		"@angular/common": ">=17.0.2",
+		"@angular/core": ">=17.0.2",
+		"@angular/forms": ">=17.0.2"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
