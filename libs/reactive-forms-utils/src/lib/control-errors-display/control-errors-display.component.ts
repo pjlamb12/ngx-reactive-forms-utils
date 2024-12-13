@@ -4,9 +4,10 @@ import { Observable, debounceTime, map, startWith } from 'rxjs';
 import { CustomErrorMessages, FORM_ERRORS, FORM_ERRORS_DEBOUNCE_TIME } from '../custom-error-message-utils';
 
 @Component({
-	selector: 'ngx-control-errors-display',
-	templateUrl: './control-errors-display.component.html',
-	styleUrls: ['./control-errors-display.component.scss'],
+    selector: 'ngx-control-errors-display',
+    templateUrl: './control-errors-display.component.html',
+    styleUrls: ['./control-errors-display.component.scss'],
+    standalone: false
 })
 export class ControlErrorsDisplayComponent implements AfterContentInit {
 	@Input() containerClasses = '';

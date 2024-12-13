@@ -4,6 +4,7 @@
 	"projectType": "application",
 	"sourceRoot": "apps/demo-app/src",
 	"prefix": "ngx-reactive-form-utils",
+	"tags": [],
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:browser",
@@ -71,10 +72,7 @@
 			}
 		},
 		"lint": {
-			"executor": "@nx/eslint:lint",
-			"options": {
-				"lintFilePatterns": ["apps/demo-app/**/*.ts", "apps/demo-app/**/*.html"]
-			}
+			"executor": "@nx/eslint:lint"
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
@@ -83,6 +81,5 @@
 				"jestConfig": "apps/demo-app/jest.config.ts"
 			}
 		}
-	},
-	"tags": []
+	}
 }
