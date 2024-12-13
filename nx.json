@@ -59,7 +59,7 @@
 		}
 	},
 	"defaultProject": "demo-app",
-	"nxCloudAccessToken": "YWNhNjk5ZmQtYTkzYS00MjlhLTlmYTEtZTA1MWVkZTRlZTYwfHJlYWQtd3JpdGU=",
+	"nxCloudAccessToken": "",
 	"useInferencePlugins": false,
 	"useLegacyCache": true
 }
