@@ -1,5 +1,25 @@
-import { AbstractControl, Form, FormControlStatus, FormGroup, ValidationErrors } from '@angular/forms';
-import { combineLatest, EMPTY, map, Observable, of, startWith } from 'rxjs';
+import {
+	AbstractControl,
+	ControlEvent,
+	FormControlStatus,
+	FormGroup,
+	PristineChangeEvent,
+	TouchedChangeEvent,
+	ValidationErrors,
+} from '@angular/forms';
+import { combineLatest, EMPTY, filter, map, Observable, of, startWith } from 'rxjs';
+
+function touchedEvents$<T>(form: AbstractControl<T>) {
+	return form.events.pipe(
+		filter((event: ControlEvent): event is TouchedChangeEvent => event instanceof TouchedChangeEvent),
+	);
+}
+
+function pristineEvents$<T>(form: AbstractControl<T>) {
+	return form.events.pipe(
+		filter((event: ControlEvent): event is PristineChangeEvent => event instanceof PristineChangeEvent),
+	);
+}
 
 export enum FormDebugFieldEnum {
 	Value = 'Value',
@@ -8,6 +28,10 @@ export enum FormDebugFieldEnum {
 	Status = 'Status',
 	Valid = 'Valid',
 	Invalid = 'Invalid',
+	Touched = 'Touched',
+	Untouched = 'Untouched',
+	Dirty = 'Dirty',
+	Pristine = 'Pristine',
 }
 export type FormDebugField =
 	| FormDebugFieldEnum.Value
@@ -15,7 +39,11 @@ export type FormDebugField =
 	| FormDebugFieldEnum.ControlErrors
 	| FormDebugFieldEnum.Status
 	| FormDebugFieldEnum.Valid
-	| FormDebugFieldEnum.Invalid;
+	| FormDebugFieldEnum.Invalid
+	| FormDebugFieldEnum.Touched
+	| FormDebugFieldEnum.Untouched
+	| FormDebugFieldEnum.Dirty
+	| FormDebugFieldEnum.Pristine;
 
 export interface ControlErrorStatusDisplay {
 	errors: ValidationErrors | null;
@@ -28,6 +56,10 @@ export interface FormDebugValue {
 	status?: FormControlStatus;
 	valid?: boolean;
 	invalid?: boolean;
+	touched?: boolean;
+	untouched?: boolean;
+	dirty?: boolean;
+	pristine?: boolean;
 }
 
 export const DEFAULT_DEBUG_FIELDS: FormDebugField[] = Object.keys(FormDebugFieldEnum).map(
@@ -45,6 +77,8 @@ export function debugForm(
 	return combineLatest([
 		form.valueChanges.pipe(startWith(form.value)),
 		form.statusChanges.pipe(startWith(form.status)),
+		touchedEvents$(form).pipe(startWith(form.touched)),
+		pristineEvents$(form).pipe(startWith(form.pristine)),
 	]).pipe(
 		map(() => {
 			const returnObject: FormDebugValue = {};
@@ -81,6 +115,22 @@ export function debugForm(
 
 			if (debugFields.includes(FormDebugFieldEnum.Valid)) {
 				returnObject.valid = form.valid;
+			}
+
+			if (debugFields.includes(FormDebugFieldEnum.Touched)) {
+				returnObject.touched = form.touched;
+			}
+
+			if (debugFields.includes(FormDebugFieldEnum.Untouched)) {
+				returnObject.untouched = form.untouched;
+			}
+
+			if (debugFields.includes(FormDebugFieldEnum.Dirty)) {
+				returnObject.dirty = form.dirty;
+			}
+
+			if (debugFields.includes(FormDebugFieldEnum.Pristine)) {
+				returnObject.pristine = form.pristine;
 			}
 
 			return returnObject;
