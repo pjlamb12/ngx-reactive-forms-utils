@@ -2,9 +2,9 @@
 	<ng-content></ng-content>
 
 	@if (rulesBroken) {
-		@if (errorsList$ | async; as errorsList) {
-			@if (errorsList && errorsList.length) {
-				@for (error of errorsList; track error) {
+		@if (errorsList(); as errors) {
+			@if (errors && errors.length) {
+				@for (error of errors; track error) {
 					<p class="{{ errorClasses() }}">{{ error }}</p>
 				}
 			}

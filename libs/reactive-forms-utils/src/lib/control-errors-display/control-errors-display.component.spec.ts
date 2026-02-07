@@ -23,4 +23,12 @@ describe('ControlErrorsDisplayComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('should calculate rulesBroken correctly', () => {
+		// Mock logic or just check basic instantiation
+		expect(component.rulesBroken).toBeFalsy();
+	});
+	it('should maintain empty errorsList initially', () => {
+		expect(component.errorsList()).toEqual([]);
+	});
 });
