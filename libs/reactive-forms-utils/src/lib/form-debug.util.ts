@@ -37,9 +37,9 @@ export const DEFAULT_DEBUG_FIELDS: FormDebugField[] = Object.keys(FormDebugField
 export function debugForm(
 	form: FormGroup,
 	debugFields: FormDebugField[] = [...DEFAULT_DEBUG_FIELDS],
-): Observable<FormDebugValue | typeof EMPTY> {
+): Observable<FormDebugValue> {
 	if (!form) {
-		return of(EMPTY);
+		return of({});
 	}
 
 	return combineLatest([
