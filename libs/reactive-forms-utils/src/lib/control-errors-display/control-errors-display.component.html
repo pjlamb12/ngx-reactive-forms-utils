@@ -1,11 +1,11 @@
-<div class="{{ containerClasses }}">
+<div class="{{ containerClasses() }}">
 	<ng-content></ng-content>
 
 	@if (rulesBroken) {
 		@if (errorsList$ | async; as errorsList) {
 			@if (errorsList && errorsList.length) {
 				@for (error of errorsList; track error) {
-					<p class="{{ errorClasses }}">{{ error }}</p>
+					<p class="{{ errorClasses() }}">{{ error }}</p>
 				}
 			}
 		}

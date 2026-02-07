@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, Inject, Input } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, inject, input } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Observable, debounceTime, map, startWith } from 'rxjs';
 import { CustomErrorMessages, FORM_ERRORS, FORM_ERRORS_DEBOUNCE_TIME } from '../custom-error-message-utils';
@@ -12,30 +12,27 @@ import { AsyncPipe } from '@angular/common';
 	imports: [AsyncPipe],
 })
 export class ControlErrorsDisplayComponent implements AfterContentInit {
-	@Input() containerClasses = '';
-	@Input() errorClasses = '';
-	@Input() rules = ['touched'];
+	containerClasses = input<string>('');
+	errorClasses = input<string>('');
+	rules = input<string[]>(['touched']);
 
 	@ContentChild(NgControl, { static: true }) control!: NgControl;
 
 	errorsList$: Observable<string[]> | undefined;
 
-	get rulesBroken() {
-		return this.rules.every((rule) => this.control[rule as keyof NgControl]);
-	}
-
+	private _errors = inject(FORM_ERRORS);
+	private _debounceTime = inject(FORM_ERRORS_DEBOUNCE_TIME);
 	private _errorMessages: CustomErrorMessages = this._errors;
 
-	constructor(
-		@Inject(FORM_ERRORS) private _errors: CustomErrorMessages,
-		@Inject(FORM_ERRORS_DEBOUNCE_TIME) private debounceTime: number,
-	) {}
+	get rulesBroken() {
+		return !!this.control && this.rules().every((rule) => this.control[rule as keyof NgControl]);
+	}
 
 	ngAfterContentInit() {
 		if (this.control) {
 			this.errorsList$ = this.control.statusChanges?.pipe(
 				startWith(this.control.status),
-				debounceTime(this.debounceTime),
+				debounceTime(this._debounceTime),
 				map(() => {
 					const errors = this.control.errors;
 

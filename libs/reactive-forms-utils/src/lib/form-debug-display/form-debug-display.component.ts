@@ -1,8 +1,9 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
-import { debugForm, DEFAULT_DEBUG_FIELDS, FormDebugField, FormDebugValue } from '../form-debug.util';
+import { debugForm, DEFAULT_DEBUG_FIELDS, FormDebugField } from '../form-debug.util';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { EMPTY, Observable } from 'rxjs';
+import { combineLatest, switchMap } from 'rxjs';
 
 @Component({
 	selector: 'ngx-form-debug-display',
@@ -12,15 +13,10 @@ import { EMPTY, Observable } from 'rxjs';
 	styleUrls: ['./form-debug-display.component.scss'],
 })
 export class FormDebugDisplayComponent {
-	@Input() debugFields: FormDebugField[] = [...DEFAULT_DEBUG_FIELDS];
-	@Input({ required: true }) form!: FormGroup; // No need for getter/setter
-	public debugData$!: Observable<FormDebugValue | typeof EMPTY>;
+	debugFields = input<FormDebugField[]>([...DEFAULT_DEBUG_FIELDS]);
+	form = input.required<FormGroup>();
 
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes['form'] || changes['debugFields']) {
-			if (this.form) {
-				this.debugData$ = debugForm(this.form, this.debugFields);
-			}
-		}
-	}
+	debugData$ = combineLatest([toObservable(this.form), toObservable(this.debugFields)]).pipe(
+		switchMap(([form, debugFields]) => debugForm(form, debugFields)),
+	);
 }

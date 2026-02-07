@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { calculateAge } from './brithday.util';
+import { calculateAge } from './birthday.util';
 
 export abstract class CustomValidators {
 	static phoneNumber(control: AbstractControl): ValidationErrors | null {
