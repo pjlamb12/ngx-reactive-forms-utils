@@ -4,3 +4,4 @@ export * from './lib/custom-validators';
 export * from './lib/form-debug.util';
 
 export * from './lib/form-debug-display/form-debug-display.component';
+export * from './lib/signals';

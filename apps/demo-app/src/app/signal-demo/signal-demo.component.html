@@ -1,0 +1,17 @@
+<form [formGroup]="form" class="mx-auto flex flex-col gap-4 justify-center items-center">
+	<div class="flex gap-2 items-start">
+		<label class="pt-2" for="name">Name: </label>
+		<ngx-control-errors-display errorClasses="text-red-500 text-sm">
+			<input type="text" formControlName="name" class="border p-2 rounded" />
+		</ngx-control-errors-display>
+	</div>
+
+	<div class="flex flex-col gap-2 p-4 border rounded bg-gray-50">
+		<h3 class="font-bold">Signal State:</h3>
+		<p>Value: {{ nameState().value }}</p>
+		<p>Valid: {{ nameState().valid }}</p>
+		<p>Dirty: {{ nameState().dirty }}</p>
+		<p>Touched: {{ nameState().touched }}</p>
+		<p>Errors: {{ nameState().errors | json }}</p>
+	</div>
+</form>
