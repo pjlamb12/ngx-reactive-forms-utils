@@ -90,3 +90,14 @@ Second is a second component that displays the form debug information on the scr
 You only need to pass in the form to the debug display component and it handles the rest.
 
 Third is the ability to determine which debug fields are returned or displayed. There is an type, `FormDebugField`, with several available fields that can be displayed. By default, all are displayed, but you can change that by providing an array of the desired fields to either the function or the component. 
+
+## Signals
+
+With the release of Angular v18, `AbstractControl` now has an `events` observable that emits all events that happen on the control. This library leverages that to provide a signal that emits the state of the form control.
+
+```ts
+const name = new FormControl('test');
+const nameState = formStateSignal(name);
+```
+
+The signal will emit the current state of the form control, including the value, status, errors, touched, dirty, valid, invalid, pending, disabled, and enabled properties.

@@ -5,9 +5,10 @@ import { ControlErrorsDisplayComponent, FormDebugDisplayComponent } from 'ngx-re
 
 import { AppComponent } from './app.component';
 import { DemoFormComponent } from './demo-form/demo-form.component';
+import { SignalDemoComponent } from './signal-demo/signal-demo.component';
 
 @NgModule({
-	declarations: [AppComponent, DemoFormComponent],
+	declarations: [AppComponent, DemoFormComponent, SignalDemoComponent],
 	imports: [BrowserModule, ReactiveFormsModule, ControlErrorsDisplayComponent, FormDebugDisplayComponent],
 	providers: [],
 	bootstrap: [AppComponent],
