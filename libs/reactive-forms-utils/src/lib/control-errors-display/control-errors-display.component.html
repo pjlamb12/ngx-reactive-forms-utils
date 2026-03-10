@@ -4,9 +4,11 @@
 	@if (rulesBroken) {
 		@if (errorsList(); as errors) {
 			@if (errors && errors.length) {
-				@for (error of errors; track error) {
-					<p class="{{ errorClasses() }}">{{ error }}</p>
-				}
+				<div [id]="errorContainerId" [attr.aria-live]="ariaLive()">
+					@for (error of errors; track error) {
+						<p class="{{ errorClasses() }}" role="alert">{{ error }}</p>
+					}
+				</div>
 			}
 		}
 	}

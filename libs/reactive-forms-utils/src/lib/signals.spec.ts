@@ -1,4 +1,4 @@
-import { Component, runInInjectionContext } from '@angular/core';
+import { Component, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { formStateSignal } from './signals';
@@ -11,7 +11,7 @@ describe('formStateSignal', () => {
 	});
 
 	it('should return initial state', () => {
-		runInInjectionContext(TestBed, () => {
+		runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
 			const state = formStateSignal(control);
 			expect(state().value).toBe('initial');
 			expect(state().valid).toBe(true);
@@ -21,7 +21,7 @@ describe('formStateSignal', () => {
 	});
 
 	it('should update on value change', () => {
-		runInInjectionContext(TestBed, () => {
+		runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
 			const state = formStateSignal(control);
 			control.setValue('new value');
 			expect(state().value).toBe('new value');
@@ -30,7 +30,7 @@ describe('formStateSignal', () => {
 
 	it('should update on status change (valid/invalid)', () => {
 		control.setValidators(Validators.required);
-		runInInjectionContext(TestBed, () => {
+		runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
 			const state = formStateSignal(control);
 			expect(state().valid).toBe(true);
 
@@ -41,7 +41,7 @@ describe('formStateSignal', () => {
 	});
 
 	it('should update on touched status', () => {
-		runInInjectionContext(TestBed, () => {
+		runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
 			const state = formStateSignal(control);
 			expect(state().touched).toBe(false);
 
@@ -51,7 +51,7 @@ describe('formStateSignal', () => {
 	});
 
 	it('should update on dirty status', () => {
-		runInInjectionContext(TestBed, () => {
+		runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
 			const state = formStateSignal(control);
 			expect(state().dirty).toBe(false);
 
@@ -64,7 +64,7 @@ describe('formStateSignal', () => {
 		const group = new FormGroup({
 			name: new FormControl(''),
 		});
-		runInInjectionContext(TestBed, () => {
+		runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
 			const state = formStateSignal(group);
 			expect(state().value).toEqual({ name: '' });
 
